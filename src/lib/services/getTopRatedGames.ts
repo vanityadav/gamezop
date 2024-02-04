@@ -1,11 +1,20 @@
-import getGames from "./getGames";
 import { Game } from "../types/game";
+import { returnGames } from "./utils";
 import sortBy from "../utils/sortGames";
 
-const getTopRatedGames = async (limit: number = 20) => {
-  const games = await getGames();
+type Args = {
+  limit?: number;
+  fetchedGames?: Game[];
+};
 
-  return sortBy<Game>(games, "rating")?.slice(0, limit);
+const getTopRatedGames = async ({ limit, fetchedGames }: Args = {}) => {
+  const games = await returnGames(fetchedGames);
+
+  return sortBy<Game>({
+    data: games,
+    accessor: "rating",
+    order: "DESC",
+  })?.slice(0, limit);
 };
 
 export default getTopRatedGames;

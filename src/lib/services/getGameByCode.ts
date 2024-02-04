@@ -1,7 +1,13 @@
-import getGames from "./getGames";
+import { Game } from "../types/game";
+import { returnGames } from "./utils";
 
-const getGameByCode = async (code: string) => {
-  const games = await getGames();
+type Args = {
+  code: string;
+  fetchedGames?: Game[];
+};
+
+const getGameByCode = async ({ code, fetchedGames }: Args) => {
+  const games = await returnGames(fetchedGames);
 
   return games?.find((game) => game.code === code);
 };

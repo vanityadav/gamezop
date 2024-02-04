@@ -28,7 +28,6 @@ type OverlayProps = {
 
 const Overlay = ({ popoverProps, drawerProps, children }: OverlayProps) => {
   const isDesktop = useMediaQuery();
-  console.log(isDesktop);
 
   if (isDesktop)
     return (

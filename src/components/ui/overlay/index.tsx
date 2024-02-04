@@ -88,7 +88,7 @@ const OverlayContent = ({
           align={align}
           sideOffset={sideOffset}
           className={cx(
-            "relative bg-background text-sm rounded-xl overflow-hidden shadow-xl  border-2 dark:border text-heading md:max-h-[500px] overflow-y-auto",
+            "relative bg-background text-sm rounded-xl overflow-hidden shadow-xl  border-2 dark:border text-foreground md:max-h-[500px] overflow-y-auto",
             className
           )}
         >
@@ -107,12 +107,12 @@ const OverlayContent = ({
       />
       <Drawer.Content
         className={cx(
-          "bg-background text-sm flex flex-col rounded-t-xl h-[85%] mt-24 fixed bottom-0 left-0 right-0 text-heading",
+          "bg-background text-sm flex flex-col rounded-t-xl h-[85%] mt-24 fixed bottom-0 left-0 right-0 text-foreground",
           className,
           "overflow-hidden"
         )}
       >
-        <div className="mx-auto w-2/4 h-2  my-2 rounded-full bg-focused "></div>
+        <div className="mx-auto w-2/4 h-2  my-2 rounded-full bg-background-focused "></div>
         <div className="overflow-y-auto">{children}</div>
       </Drawer.Content>
       <Drawer.Overlay />
@@ -124,7 +124,10 @@ function OverlayElement({ className, ...props }: ComponentPropsWithRef<"div">) {
   return (
     <div
       {...props}
-      className={cx("p-3  hover:bg-focused hover:cursor-pointer", className)}
+      className={cx(
+        "p-3  hover:bg-background-focused hover:cursor-pointer",
+        className
+      )}
     />
   );
 }

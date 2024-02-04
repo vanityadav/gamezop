@@ -11,8 +11,9 @@ const config: Config = {
     extend: {
       colors: {
         background: "rgb(var(--background))",
-        heading: "rgb(var(--text-primary))",
-        focused: "rgb(var(--focused))",
+        foreground: "rgb(var(--foreground))",
+        "muted-foreground": "rgb(var(--muted-foreground))",
+        "background-focused": "rgb(var(--background-focused))",
       },
     },
   },

@@ -20,8 +20,8 @@ export default function UserAccountSection() {
   return (
     <div className="flex items-center justify-between">
       <Overlay drawerProps={{ shouldScaleBackground: true }}>
-        <OverlayTriggerButton>
-          <Globe className="stroke-heading" />
+        <OverlayTriggerButton className="group">
+          <Globe className="stroke-muted-foreground group-hover:stroke-foreground" />
         </OverlayTriggerButton>
         <OverlayContent>
           {dummyLanguages.map((language) => (
@@ -33,8 +33,8 @@ export default function UserAccountSection() {
       </Overlay>
 
       <Overlay drawerProps={{ shouldScaleBackground: true }}>
-        <OverlayTriggerButton>
-          <BellDot className="stroke-heading" />
+        <OverlayTriggerButton className="group">
+          <BellDot className="stroke-muted-foreground group-hover:stroke-foreground" />
         </OverlayTriggerButton>
         <OverlayContent>
           {notifications.map((notification) => (
@@ -57,8 +57,8 @@ export default function UserAccountSection() {
       </Overlay>
 
       <Overlay drawerProps={{ shouldScaleBackground: true }}>
-        <OverlayTriggerButton>
-          <User className="stroke-heading" />
+        <OverlayTriggerButton className="group">
+          <User className="stroke-muted-foreground group-hover:stroke-foreground" />
         </OverlayTriggerButton>
         <OverlayContent>
           {dummySettings.map((setting) => (
@@ -72,13 +72,21 @@ export default function UserAccountSection() {
   );
 }
 
-const OverlayTriggerButton = ({ children }: { children: ReactNode }) => {
+const OverlayTriggerButton = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className: string;
+}) => {
   return (
     <OverlayTrigger
       drawerProps={{ asChild: true }}
       popoverProps={{ asChild: true }}
     >
-      <Button intent="icon">{children}</Button>
+      <Button intent="icon" className={className}>
+        {children}
+      </Button>
     </OverlayTrigger>
   );
 };

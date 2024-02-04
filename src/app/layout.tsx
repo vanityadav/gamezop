@@ -1,4 +1,5 @@
 import "./globals.css";
+import cx from "@/lib/utils/cx";
 import type { Metadata } from "next";
 import Providers from "@/lib/providers";
 import Footer from "@/components/layouts/footer";
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={"bg-background" + " " + sans.className}>
+      <body className={cx("bg-background", sans.className)}>
         <Providers>
           <div vaul-drawer-wrapper="" className="bg-background min-h-[100dvh]">
             <Header />

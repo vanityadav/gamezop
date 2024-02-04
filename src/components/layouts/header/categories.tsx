@@ -11,7 +11,7 @@ export default async function Categories() {
           <Link
             key={category}
             href={`/categories/${encodeURIComponent(category.toLowerCase())}`}
-            className="px-4 py-2 bg-focused rounded-full"
+            className="px-4 py-2 text-foreground text-sm rounded-full border  border-transparent hover:border-foreground hover:border-solid"
           >
             {category}
           </Link>

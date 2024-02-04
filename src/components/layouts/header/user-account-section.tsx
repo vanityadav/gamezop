@@ -17,60 +17,61 @@ import {
 } from "@/lib/constants/headerData";
 
 export default function UserAccountSection() {
+  const iconClass = "stroke-muted-foreground group-hover:stroke-foreground";
   return (
     <div className="flex items-center justify-between">
-      <Overlay drawerProps={{ shouldScaleBackground: true }}>
-        <OverlayTriggerButton className="group">
-          <Globe className="stroke-muted-foreground group-hover:stroke-foreground" />
-        </OverlayTriggerButton>
-        <OverlayContent>
-          {dummyLanguages.map((language) => (
-            <OverlayElement className="pr-24" key={language}>
-              {language}
-            </OverlayElement>
-          ))}
-        </OverlayContent>
-      </Overlay>
+      <ActionButton icon={<Globe className={iconClass} />}>
+        {dummyLanguages.map((language) => (
+          <OverlayElement className="pr-24" key={language}>
+            {language}
+          </OverlayElement>
+        ))}
+      </ActionButton>
 
-      <Overlay drawerProps={{ shouldScaleBackground: true }}>
-        <OverlayTriggerButton className="group">
-          <BellDot className="stroke-muted-foreground group-hover:stroke-foreground" />
-        </OverlayTriggerButton>
-        <OverlayContent>
-          {notifications.map((notification) => (
-            <OverlayElement key={notification.image}>
-              <div className="grid grid-flow-col gap-4 align-middle md:max-w-[300px] ">
-                <Image
-                  src={notification.image}
-                  height={40}
-                  width={40}
-                  alt="icon"
-                  className="rounded-xl object-cover aspect-square"
-                />
-                <span className="line-clamp-2 text-balance">
-                  {notification.content}
-                </span>
-              </div>
-            </OverlayElement>
-          ))}
-        </OverlayContent>
-      </Overlay>
+      <ActionButton icon={<BellDot className={iconClass} />}>
+        {notifications.map((notification) => (
+          <OverlayElement key={notification.image}>
+            <div className="grid grid-flow-col gap-4 align-middle md:max-w-[300px] ">
+              <Image
+                src={notification.image}
+                height={40}
+                width={40}
+                alt="icon"
+                className="rounded-xl object-cover aspect-square"
+              />
+              <span className="line-clamp-2 text-balance">
+                {notification.content}
+              </span>
+            </div>
+          </OverlayElement>
+        ))}
+      </ActionButton>
 
-      <Overlay drawerProps={{ shouldScaleBackground: true }}>
-        <OverlayTriggerButton className="group">
-          <User className="stroke-muted-foreground group-hover:stroke-foreground" />
-        </OverlayTriggerButton>
-        <OverlayContent>
-          {dummySettings.map((setting) => (
-            <OverlayElement className="pr-24" key={setting}>
-              {setting}
-            </OverlayElement>
-          ))}
-        </OverlayContent>
-      </Overlay>
+      <ActionButton icon={<User className={iconClass} />}>
+        {dummySettings.map((setting) => (
+          <OverlayElement className="pr-24" key={setting}>
+            {setting}
+          </OverlayElement>
+        ))}
+      </ActionButton>
     </div>
   );
 }
+
+const ActionButton = ({
+  children,
+  icon,
+}: {
+  children: ReactNode;
+  icon: ReactNode;
+}) => {
+  return (
+    <Overlay drawerProps={{ shouldScaleBackground: true }}>
+      <OverlayTriggerButton className="group">{icon}</OverlayTriggerButton>
+      <OverlayContent>{children}</OverlayContent>
+    </Overlay>
+  );
+};
 
 const OverlayTriggerButton = ({
   children,

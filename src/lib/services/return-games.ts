@@ -1,4 +1,4 @@
-import getGames from "./getGames";
+import getGames from "./get-games";
 import { Game } from "../types/game";
 
 const returnGames = async (fetchedGames?: Game[]) => {

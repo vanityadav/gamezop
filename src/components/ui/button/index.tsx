@@ -3,7 +3,7 @@ import cx from "@/lib/utils/cx";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded  disabled:opacity-50 disabled:pointer-events-none",
+  "inline-flex items-center justify-center disabled:opacity-50 disabled:pointer-events-none",
   {
     variants: {
       intent: {

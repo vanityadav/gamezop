@@ -1,8 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import cx from "@/lib/utils/cx";
 import { Game } from "@/lib/types/game";
 import { Heart, Star } from "lucide-react";
 import { Languages } from "@/lib/types/languages";
+import Link from "next/link";
 
 type Props = {
   game: Game;
@@ -11,60 +13,71 @@ type Props = {
 
 export default function GameCard({ game, language = "en" }: Props) {
   const {
+    code,
     name,
     assets: { cover },
     categories,
     rating,
+    colorVibrant,
   } = game;
 
   return (
-    <div className="grid  text-sm gap-3 text-foreground">
-      <div className="relative group">
-        <div className="sm:hidden group-hover:block absolute p-4 right-0">
-          <Heart className="h-7 w-7 text-white" />
+    <Link
+      className="grid row-span-2 grid-rows-subgrid gap-5 group"
+      href={`/games/${decodeURIComponent(code)}`}
+    >
+      <div className="relative">
+        <div
+          className="sm:hidden group/icon group-hover:block absolute p-2 right-2 top-2 backdrop-blur-sm rounded-full"
+          style={{ background: colorVibrant }}
+        >
+          <Heart className="text-foreground" />
         </div>
         <Image
           src={cover}
           alt={name[language]}
-          width={400}
-          height={400}
-          className="rounded object-contain"
+          width={300}
+          height={246}
+          className="h-full w-full object-cover rounded-md"
         />
       </div>
+      <div className="grid gap-2">
+        <div className="flex items-start justify-between gap-4">
+          <span className="text-nowrap font-medium">{name[language]}</span>
+          <Rating rating={rating} />
+        </div>
 
-      <div className="flex items-start justify-between gap-4">
-        <span className="text-balance">{name[language]}</span>
-        <Rating rating={rating} />
+        <Categories categories={categories[language]} />
       </div>
-
-      <Categories categories={categories[language]} />
-    </div>
+    </Link>
   );
 }
 
 const Rating = ({ rating }: { rating: number }) => {
   if (!rating) return null;
-  <div className="flex items-center max-w-max">
-    {rating}
-    <Star strokeWidth={0} className="h-4 w-4 fill-foreground" />
-  </div>;
+  return (
+    <div className="flex items-center max-w-max">
+      {rating}
+      <Star strokeWidth={0} className="h-4 w-4 fill-foreground" />
+    </div>
+  );
 };
 
 const Categories = ({ categories }: { categories: string[] }) => {
   if (categories.length === 0) return null;
-
-  <div className="text-balance text-xs">
-    {categories.map((category, index) => (
-      <span
-        key={category}
-        className={
-          index >= 1
-            ? "ml-5 relative before:absolute before:-left-3 before:top-1/2  before:h-1 before:w-1 before:rounded-full before:bg-foreground"
-            : ""
-        }
-      >
-        {category}
-      </span>
-    ))}
-  </div>;
+  return (
+    <div className="text-balance text-xs font-light text-foreground-muted">
+      {categories.map((category, index) => (
+        <span
+          key={category}
+          className={cx(
+            index >= 1 &&
+              "ml-5 relative before:absolute before:-left-3 before:top-1/2  before:h-1 before:w-1 before:rounded-full before:bg-foreground"
+          )}
+        >
+          {category}
+        </span>
+      ))}
+    </div>
+  );
 };

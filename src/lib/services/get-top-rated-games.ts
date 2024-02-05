@@ -1,6 +1,6 @@
 import { Game } from "../types/game";
-import { returnGames } from "./utils";
-import sortBy from "../utils/sortGames";
+import { returnGames } from "./return-games";
+import sortBy from "../utils/sort-games";
 
 type Args = {
   limit?: number;

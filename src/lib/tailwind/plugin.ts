@@ -1,11 +1,6 @@
 import plugin from "tailwindcss/plugin";
 
-const customPlugin = plugin(function ({
-  addUtilities,
-  addComponents,
-  e,
-  config,
-}) {
+const customPlugin = plugin(function ({ addUtilities }) {
   addUtilities({
     ".no-scrollbar::-webkit-scrollbar": {
       display: "none",

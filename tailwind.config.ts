@@ -12,8 +12,9 @@ const config: Config = {
       colors: {
         background: "rgb(var(--background))",
         foreground: "rgb(var(--foreground))",
-        "muted-foreground": "rgb(var(--muted-foreground))",
+        "foreground-muted": "rgb(var(--foreground-muted))",
         "background-focused": "rgb(var(--background-focused))",
+        border: "rgb(var(--border))",
       },
     },
   },

@@ -1,5 +1,6 @@
 import "./globals.css";
 import cx from "@/lib/utils/cx";
+import { ReactNode } from "react";
 import type { Metadata } from "next";
 import Providers from "@/lib/providers";
 import Footer from "@/components/layouts/footer";
@@ -13,19 +14,23 @@ export const metadata: Metadata = {
   description: "Web game platform",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+type Props = Readonly<{
+  children: ReactNode;
+  modal: ReactNode;
+}>;
+
+export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang="en">
       <body className={cx("bg-background", sans.className)}>
         <Providers>
           <div vaul-drawer-wrapper="" className="bg-background min-h-[100dvh]">
-            <Header />
-            {children}
-            <Footer />
+            <div className="w-[90%] m-auto text-sm text-foreground">
+              <Header />
+              {children}
+              {modal}
+              <Footer />
+            </div>
           </div>
         </Providers>
       </body>

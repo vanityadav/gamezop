@@ -1,5 +1,5 @@
 import { Game } from "../types/game";
-import { returnGames } from "./utils";
+import { returnGames } from "./return-games";
 import { Languages } from "../types/languages";
 
 type Args = {

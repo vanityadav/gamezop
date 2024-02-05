@@ -1,5 +1,6 @@
 import { Game } from "../types/game";
-import { returnGames } from "./utils";
+import { notFound } from "next/navigation";
+import { returnGames } from "./return-games";
 
 type Args = {
   code: string;
@@ -9,7 +10,10 @@ type Args = {
 const getGameByCode = async ({ code, fetchedGames }: Args) => {
   const games = await returnGames(fetchedGames);
 
-  return games?.find((game) => game.code === code);
+  const game = games?.find((game) => game.code === code);
+
+  if (!game) notFound();
+  return game;
 };
 
 export default getGameByCode;

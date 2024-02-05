@@ -15,30 +15,5 @@ export function useMediaQuery(query: string = "(min-width: 768px)") {
     return () => result.removeEventListener("change", onChange);
   }, [query]);
 
-  //   React.useEffect(() => {
-  //     const handleDeviceDetection = () => {
-  //       const userAgent = navigator.userAgent.toLowerCase();
-  //       const isMobile =
-  //         /iphone|ipad|ipod|android|blackberry|windows phone/g.test(userAgent);
-  //       const isTablet =
-  //         /(ipad|tablet|playbook|silk)|(android(?!.*mobile))/g.test(userAgent);
-
-  //       if (isMobile) {
-  //         setValue(false);
-  //       } else if (isTablet) {
-  //         setValue(false);
-  //       } else {
-  //         setValue(true);
-  //       }
-  //     };
-
-  //     handleDeviceDetection();
-  //     window.addEventListener("resize", handleDeviceDetection);
-
-  //     return () => {
-  //       window.removeEventListener("resize", handleDeviceDetection);
-  //     };
-  //   }, []);
-
   return value;
 }

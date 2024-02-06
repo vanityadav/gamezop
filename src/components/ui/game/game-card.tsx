@@ -3,12 +3,12 @@ import Image from "next/image";
 import cx from "@/lib/utils/cx";
 import { Game } from "@/lib/types/game";
 import { Heart, Star } from "lucide-react";
-import { Languages } from "@/lib/types/languages";
+import { Language } from "@/lib/types/language";
 import Link from "next/link";
 
 type Props = {
   game: Game;
-  language?: Languages;
+  language?: Language;
 };
 
 export default function GameCard({ game, language = "en" }: Props) {
@@ -36,9 +36,9 @@ export default function GameCard({ game, language = "en" }: Props) {
         <Image
           src={cover}
           alt={name[language]}
-          width={300}
-          height={246}
-          className="h-full w-full object-cover rounded-md"
+          width={600}
+          height={492}
+          className="h-full w-full object-contain rounded-md"
         />
       </div>
       <div className="grid gap-2">

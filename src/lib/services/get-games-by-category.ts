@@ -1,13 +1,13 @@
 import { Game } from "../types/game";
 import { returnGames } from "./return-games";
 import { notFound } from "next/navigation";
-import { Languages } from "../types/languages";
+import { Language } from "../types/language";
 import getGameCategories from "./get-game-categories";
 
 type Args = {
   category: string;
   fetchedGames?: Game[];
-  language?: Languages;
+  language?: Language;
 };
 
 const getGamesByCategory = async ({

@@ -1,4 +1,4 @@
-import { LanguageBasedData, LanguageBasedDataList } from "./languages";
+import { LanguageBasedData, LanguageBasedDataList } from "./language";
 
 export type Game = {
   code: string;

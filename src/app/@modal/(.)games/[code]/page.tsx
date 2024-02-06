@@ -1,17 +1,21 @@
+import GameInfo from "@/components/ui/game/game-info";
+import GameDrawer from "@/components/ui/game/game-drawer";
 import getGameByCode from "@/lib/services/get-game-by-code";
-import { MyDrawer } from "./comp";
 
 type Props = {
   params: { code: string };
 };
 
-export default async function Page({ params: { code } }: Props) {
-  const game = await getGameByCode({ code: decodeURIComponent(code) });
+export default function Page({ params: { code } }: Props) {
   return (
-    <div>
-      <MyDrawer>
-        <p className="text-7xl">{code}</p>
-      </MyDrawer>
-    </div>
+    <GameDrawer>
+      <GamePage code={code} />
+    </GameDrawer>
   );
 }
+
+const GamePage = async ({ code }: { code: string }) => {
+  const game = await getGameByCode({ code: decodeURIComponent(code) });
+
+  return <GameInfo game={game} />;
+};

@@ -1,6 +1,6 @@
 import CategoryBar from "@/components/layouts/category-bar";
-import GameCard from "@/components/ui/game-card";
-import GameSection from "@/components/ui/game-card/game-section";
+import GameCard from "@/components/ui/game/game-card";
+import GameSection from "@/components/ui/game/game-section";
 import getGames from "@/lib/services/get-games";
 import React from "react";
 

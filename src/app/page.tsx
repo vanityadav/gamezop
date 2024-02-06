@@ -1,7 +1,7 @@
 import getGames from "@/lib/services/get-games";
-import GameCard from "@/components/ui/game-card";
+import GameCard from "@/components/ui/game/game-card";
 import CategoryBar from "@/components/layouts/category-bar";
-import GameSection from "@/components/ui/game-card/game-section";
+import GameSection from "@/components/ui/game/game-section";
 
 export default async function Home() {
   const games = await getGames();

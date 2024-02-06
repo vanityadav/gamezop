@@ -1,11 +1,11 @@
 import { Game } from "../types/game";
 import { returnGames } from "./return-games";
 import sortBy from "../utils/sort-games";
-import { Languages } from "../types/languages";
+import { Language } from "../types/language";
 
 type Args = {
   fetchedGames?: Game[];
-  language?: Languages;
+  language?: Language;
   order?: SortOrder;
 };
 

@@ -1,11 +1,11 @@
 // add supported languages in Union types "en" | "fr" | "es"
 
-export type Languages = "en";
+export type Language = "en";
 
 export type LanguageBasedData = {
-  [x in Languages]: string;
+  [x in Language]: string;
 };
 
 export type LanguageBasedDataList = {
-  [x in Languages]: string[];
+  [x in Language]: string[];
 };

@@ -25,7 +25,7 @@ export default function RootLayout({ children, modal }: Props) {
       <body className={cx("bg-background", sans.className)}>
         <Providers>
           <div vaul-drawer-wrapper="" className="bg-background min-h-[100dvh]">
-            <div className="w-[90%] m-auto text-sm text-foreground">
+            <div className="w-[96%] md:w-[90%] m-auto text-sm text-foreground">
               <Header />
               {children}
               {modal}

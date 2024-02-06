@@ -1,11 +1,11 @@
 import { Game } from "../types/game";
 import { returnGames } from "./return-games";
-import { Languages } from "../types/languages";
+import { Language } from "../types/language";
 
 type Args = {
   tag: string;
   fetchedGames?: Game[];
-  language?: Languages;
+  language?: Language;
 };
 
 const getGamesByTag = async ({ tag, fetchedGames, language = "en" }: Args) => {

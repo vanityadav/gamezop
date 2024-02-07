@@ -1,19 +1,25 @@
-import { Game } from "../types/game";
-import { returnGames } from "./return-games";
-import { Language } from "../types/language";
+import { limitResults, returnGames } from "./utils";
 
-type Args = {
+type Args = LimitedResults & {
   tag: string;
   fetchedGames?: Game[];
   language?: Language;
 };
 
-const getGamesByTag = async ({ tag, fetchedGames, language = "en" }: Args) => {
+const getGamesByTag = async ({
+  tag,
+  fetchedGames,
+  language = "en",
+  skip = 0,
+  take = 10,
+}: Args) => {
   const games = await returnGames(fetchedGames);
 
-  return games.filter((game) =>
+  const filteredGames = games.filter((game) =>
     game.tags[language].toString().toLowerCase().includes(tag.toLowerCase())
   );
+
+  return limitResults(filteredGames, take, skip);
 };
 
 export default getGamesByTag;

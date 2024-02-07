@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import cx from "@/lib/utils/cx";
-import { Game } from "@/lib/types/game";
-import { Language } from "@/lib/types/language";
 import ringBuffer from "@/lib/utils/ring-buffer";
 import useGameCarousel from "@/lib/hooks/use-game-carousel";
 
@@ -17,6 +15,7 @@ export default function GameCarousel({ game, language = "en" }: Props) {
     assets: { screens },
     gamePreviews,
     isPortrait,
+    name,
   } = game;
 
   const {
@@ -30,7 +29,7 @@ export default function GameCarousel({ game, language = "en" }: Props) {
   return (
     <div className={cx("flex flex-col gap-2", isPortrait && "flex-row")}>
       <div
-        className={cx("overflow-hidden", isPortrait && "flex-[4]")}
+        className={cx("overflow-hidden", isPortrait && "h-fit flex-[4]")}
         ref={heroCarouselRef}
       >
         <div className="flex">
@@ -40,9 +39,11 @@ export default function GameCarousel({ game, language = "en" }: Props) {
                 key={index}
                 className="object-contain w-full rounded-md"
                 src={ringBuffer(index, screens)}
-                alt="Your alt text"
+                alt={name[language]}
                 height={isPortrait ? 1280 : 720}
                 width={isPortrait ? 720 : 1280}
+                placeholder="blur"
+                blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsamhYAQAFOgIsGY9yDQAAAABJRU5ErkJggg=="
               />
             </div>
           ))}
@@ -50,26 +51,28 @@ export default function GameCarousel({ game, language = "en" }: Props) {
       </div>
 
       <div className="overflow-hidden flex-1" ref={thumbCarouselRef}>
-        <div className={cx("flex gap-1", isPortrait && "flex-col")}>
+        <div className={cx("flex gap-1", isPortrait && "flex-col h-[200px]")}>
           {slides.map((index) => (
             <div
               key={index}
               className={cx(
-                "opacity-40",
+                "opacity-30",
+                isPortrait && "flex",
                 index === selectedIndex && "opacity-100"
               )}
             >
               <button
                 onClick={() => onThumbClick(index)}
                 className="touch-manipulation w-full"
-                type="button"
               >
                 <Image
                   height={isPortrait ? 320 : 180}
                   width={isPortrait ? 180 : 320}
-                  className="w-full object-contain rounded-md "
+                  className="w-full object-contain rounded-md"
                   src={ringBuffer(index, screens)}
-                  alt="Your alt text"
+                  alt={name[language]}
+                  placeholder="blur"
+                  blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsamhYAQAFOgIsGY9yDQAAAABJRU5ErkJggg=="
                 />
               </button>
             </div>

@@ -10,7 +10,7 @@ export default async function Page({ params: { code } }: Props) {
 
   return (
     <div className="mt-8 md:mt-10">
-      <GameInfo game={game} />;
+      <GameInfo game={game} />
     </div>
   );
 }

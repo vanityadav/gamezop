@@ -1,7 +1,5 @@
-import { Game } from "../types/game";
-import { returnGames } from "./return-games";
+import { returnGames } from "./utils";
 import sortBy from "../utils/sort-games";
-import { Language } from "../types/language";
 
 type Args = {
   fetchedGames?: Game[];

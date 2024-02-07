@@ -1,4 +1,3 @@
-import { Game } from "../types/game";
 import games from "../../data.json";
 
 type GamesApiResponse = {

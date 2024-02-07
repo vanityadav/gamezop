@@ -11,8 +11,9 @@ type Args<T> =
     };
 
 const sortBy = <T>({ data, order = "ASC", accessor }: Args<T>) => {
+  // TODO: .toSorted() method throws error during deployment. Fix this error
   if (accessor)
-    return data?.toSorted((value1, value2) => {
+    return data?.sort((value1, value2) => {
       if (value1[accessor] > value2[accessor]) return order === "ASC" ? 1 : -1;
       else if (value1[accessor] < value2[accessor])
         return order === "ASC" ? -1 : 1;
@@ -20,7 +21,7 @@ const sortBy = <T>({ data, order = "ASC", accessor }: Args<T>) => {
       return 0;
     });
   else {
-    return data?.toSorted((value1, value2) => {
+    return data?.sort((value1, value2) => {
       if (value1 > value2) return order === "ASC" ? 1 : -1;
       else if (value1 < value2) return order === "ASC" ? -1 : 1;
 

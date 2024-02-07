@@ -44,6 +44,8 @@ export default function UserAccountSection() {
                 width={40}
                 alt="icon"
                 className="rounded-xl object-cover aspect-square"
+                placeholder="blur"
+                blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsamhYAQAFOgIsGY9yDQAAAABJRU5ErkJggg=="
               />
               <span className="line-clamp-2 text-balance my-auto">
                 {notification.content}

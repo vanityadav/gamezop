@@ -1,19 +1,17 @@
 import GameCard from "@/components/ui/game/game-card";
 import GameSection from "@/components/ui/game/game-section";
-import getGamesByCategory from "@/lib/services/get-games-by-category";
+import getGamesByTag from "@/lib/services/get-games-by-tag";
 
-type Props = {
-  params: { categoryId: string };
-};
+type Props = { params: { tagId: string } };
 
-export default async function CategoryPage({ params }: Props) {
-  const category = decodeURIComponent(params.categoryId);
+export default async function Page({ params: { tagId } }: Props) {
+  const tag = decodeURIComponent(tagId);
 
-  const games = await getGamesByCategory({ category });
+  const games = await getGamesByTag({ tag });
 
   return (
     <GameSection
-      heading={category}
+      heading={tag}
       count={games.length}
       intent="grid"
       className="mt-16 mb-12"

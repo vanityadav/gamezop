@@ -1,6 +1,5 @@
-import { Game } from "../types/game";
+import { returnGames } from "./utils";
 import { notFound } from "next/navigation";
-import { returnGames } from "./return-games";
 
 type Args = {
   code: string;

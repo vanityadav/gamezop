@@ -1,31 +1,37 @@
 import { notFound } from "next/navigation";
 import { limitResults, returnGames } from "./utils";
-import getGameCategories from "./get-game-categories";
+import getGameTypes from "./get-game-types";
 
 type Args = LimitedResults & {
-  category: string;
+  value: string;
   fetchedGames?: Game[];
   language?: Language;
+  type: "tags" | "categories";
 };
 
-const getGamesByCategory = async ({
-  category,
+const getGamesByTypes = async ({
+  value,
   fetchedGames,
   language = "en",
   take,
   skip,
+  type,
 }: Args) => {
   const games = await returnGames(fetchedGames);
 
-  const categories = await getGameCategories({ fetchedGames: games });
+  const types = await getGameTypes({
+    fetchedGames: games,
+    type,
+    withCount: false,
+  });
 
-  if (!categories.toString().toLowerCase().includes(category)) notFound();
+  if (!types.toString().toLowerCase().includes(value)) notFound();
 
   const filteredGames = games.filter((games) =>
-    games.categories[language]
+    games[type][language]
       ?.toString()
       .toLowerCase()
-      .includes(category.toLowerCase())
+      .includes(value.toLowerCase())
   );
 
   if (take || skip) return limitResults(filteredGames, take, skip);
@@ -33,4 +39,4 @@ const getGamesByCategory = async ({
   return filteredGames;
 };
 
-export default getGamesByCategory;
+export default getGamesByTypes;

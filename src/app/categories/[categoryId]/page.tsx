@@ -1,6 +1,6 @@
 import GameCard from "@/components/ui/game/game-card";
 import GameSection from "@/components/ui/game/game-section";
-import getGamesByCategory from "@/lib/services/get-games-by-category";
+import getGamesByTypes from "@/lib/services/get-games-by-types";
 
 type Props = {
   params: { categoryId: string };
@@ -9,7 +9,7 @@ type Props = {
 export default async function CategoryPage({ params }: Props) {
   const category = decodeURIComponent(params.categoryId);
 
-  const games = await getGamesByCategory({ category });
+  const games = await getGamesByTypes({ type: "categories", value: category });
 
   return (
     <GameSection

@@ -38,7 +38,7 @@ export default function LinkLabelSection({
               );
               setOpen(false);
             }}
-            className="text-xs px-2 py-1 bg-background-focused/70 text-foreground-muted rounded text-center hover:text-foreground hover:bg-background-focused"
+            className="cursor-pointer text-xs px-2 py-1 bg-background-focused/70 text-foreground-muted rounded text-center hover:text-foreground hover:bg-background-focused"
           >
             {label}
           </div>

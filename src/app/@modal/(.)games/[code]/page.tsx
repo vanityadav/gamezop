@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function Page({ params: { code } }: Props) {
-  console.log("model called ", code);
   return (
     <GameDrawer>
       {/* TODO: Make Loader */}

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Button from "../button";
 import { useContext } from "react";
 import { Heart } from "lucide-react";
-import { getImageProps } from "next/image";
+import Image, { getImageProps } from "next/image";
 import { CarouselContext } from "./game-carousel";
 
 type Props = {};
@@ -18,11 +18,7 @@ export default function FeaturedCarouselHero({}: Props) {
   return (
     <>
       {(screens as Game[]).map((game) => (
-        <Link
-          key={game.code}
-          className="flex-[0_0_100%] relative group"
-          href={`/games/${encodeURIComponent(game.code)}`}
-        >
+        <div key={game.code} className="flex-[0_0_100%] relative group">
           <div className="absolute z-10 bottom-4 left-4 flex flex-col gap-4 text-background dark:text-foreground text-shadow-dark">
             <h1 className="max-sm:text-xl text-3xl font-bold">
               {game.name[language]}
@@ -40,13 +36,15 @@ export default function FeaturedCarouselHero({}: Props) {
               </Button>
             </div>
           </div>
-          <div className="absolute inset-0 z-0 featured-gradient"></div>
+          <Link href={`/games/${encodeURIComponent(game.code)}`}>
+            <div className="absolute inset-0 z-0 featured-gradient"></div>
+          </Link>
           <FeaturedImage
             alt={game.name[language]}
             wall={game.assets.wall}
             cover={game.assets.cover}
           />
-        </Link>
+        </div>
       ))}
     </>
   );
@@ -91,7 +89,13 @@ const FeaturedImage = ({ alt, wall, cover }: ImageProps) => {
         height={height}
         width={width}
       />
-      <img {...rest} alt={alt} className="h-full w-full  object-contain " />
+      <Image
+        {...rest}
+        width={700}
+        height={400}
+        alt={alt}
+        className="h-full w-full  object-contain "
+      />
     </picture>
   );
 };

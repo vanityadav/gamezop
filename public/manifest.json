@@ -2,7 +2,7 @@
   "theme_color": "#4051B8",
   "background_color": "#fff",
   "display": "standalone",
-  "scope": "https://vanit-gamezop.vercel.app/",
+  "scope": "/",
   "start_url": "https://vanit-gamezop.vercel.app/",
   "name": "Gamezop",
   "short_name": "GZ",

@@ -49,8 +49,8 @@ export default function Footer() {
 
         <div className="space-y-4 h-[1px] w-full bg-foreground-muted" />
         <p>
-          © 2024 Advergame Technologies Pvt. Ltd. ("ATPL"). Gamezop ® & Quizzop
-          ® are registered trademarks of ATPL
+          © 2024 Advergame Technologies Pvt. Ltd. (ATPL). Gamezop ® & Quizzop ®
+          are registered trademarks of ATPL
         </p>
       </div>
     </footer>

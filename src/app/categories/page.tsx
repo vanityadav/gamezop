@@ -1,14 +1,10 @@
-import getGameCategories from "@/lib/services/get-game-categories";
-import React from "react";
+import { Metadata } from "next";
+import TypesPage from "@/components/pages/types-page";
 
-export default async function Page() {
-  const categories = await getGameCategories();
+export const metadata: Metadata = {
+  title: "All Categories | Gamezop",
+};
 
-  return (
-    <div>
-      {categories.map((category) => (
-        <div key={category}>{category}</div>
-      ))}
-    </div>
-  );
+export default function Page() {
+  return <TypesPage title="All Categories" type="categories" />;
 }

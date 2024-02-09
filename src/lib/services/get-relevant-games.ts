@@ -1,32 +1,46 @@
-import { Game } from "../types/game";
-import { returnGames } from "./return-games";
-import { Languages } from "../types/languages";
+import {
+  returnGames,
+  limitResults,
+  filterGamesByMultipleTags,
+  filterGamesByMultipleCategories,
+} from "./utils";
 
 type Args = {
+  code: string;
   tags: string[];
   categories: string[];
-  limit?: number;
   fetchedGames?: Game[];
-  language?: Languages;
+  language?: Language;
+  skip?: number;
+  take?: number;
 };
 
 const getRelevantGames = async ({
+  code,
   tags,
   categories,
-  limit,
+  skip = 0,
+  take = 10,
   fetchedGames,
   language = "en",
 }: Args) => {
+  if (categories.length === 0 && tags.length === 0) return [];
+
   const games = await returnGames(fetchedGames);
 
-  return games
-    .filter((game) =>
-      game.categories[language].some((category) =>
-        categories.includes(category)
-      )
-    )
-    .filter((game) => game.tags[language].some((tag) => tags.includes(tag)))
-    .slice(0, limit);
+  if (tags.length === 0) {
+    return limitResults(
+      filterGamesByMultipleCategories(games, categories, language),
+      take,
+      skip
+    ).filter((game) => game.code !== code);
+  }
+
+  return limitResults(
+    filterGamesByMultipleTags(games, tags, language),
+    take,
+    skip
+  ).filter((game) => game.code !== code);
 };
 
 export default getRelevantGames;

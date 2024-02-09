@@ -8,8 +8,11 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useMediaQuery } from "@/lib/hooks/use-media-query";
 import { ComponentPropsWithRef, ReactNode, useContext } from "react";
 
+type Element = "drawer" | "popover" | "auto";
+
 type Context = {
-  isDesktop: boolean;
+  isPopover: boolean;
+  element?: Element;
 };
 
 const OverLayContext = createContext<Context | null>(null);
@@ -17,26 +20,33 @@ const OverLayContext = createContext<Context | null>(null);
 type OverlayProps = {
   popoverProps?: Popover.PopoverProps;
   drawerProps?: DialogPrimitive.DialogProps & {
-    modal?: boolean;
-    nested?: boolean;
-    direction?: "top" | "bottom" | "left" | "right";
     shouldScaleBackground?: boolean;
-    open?: boolean;
   };
+  element?: Element;
   children: ReactNode;
 };
 
-const Overlay = ({ popoverProps, drawerProps, children }: OverlayProps) => {
+const Overlay = ({
+  popoverProps,
+  drawerProps,
+  children,
+  element = "auto",
+}: OverlayProps) => {
   const isDesktop = useMediaQuery();
 
-  if (isDesktop)
+  let isPopover = isDesktop;
+
+  if (element === "popover") isPopover = true;
+  if (element === "drawer") isPopover = false;
+
+  if (isPopover)
     return (
-      <OverLayContext.Provider value={{ isDesktop }}>
+      <OverLayContext.Provider value={{ isPopover }}>
         <Popover.Root {...popoverProps}>{children}</Popover.Root>
       </OverLayContext.Provider>
     );
   return (
-    <OverLayContext.Provider value={{ isDesktop }}>
+    <OverLayContext.Provider value={{ isPopover }}>
       <Drawer.Root {...drawerProps}>{children}</Drawer.Root>
     </OverLayContext.Provider>
   );
@@ -56,7 +66,7 @@ const OverlayTrigger = ({
   const context = useContext(OverLayContext);
   if (!context) throw new Error("Context not in scope");
 
-  if (context.isDesktop)
+  if (context.isPopover)
     return <Popover.Trigger {...popoverProps}>{children}</Popover.Trigger>;
 
   return <Drawer.Trigger {...drawerProps}>{children}</Drawer.Trigger>;
@@ -80,14 +90,14 @@ const OverlayContent = ({
   const context = useContext(OverLayContext);
   if (!context) throw new Error("Context not in scope");
 
-  if (context.isDesktop)
+  if (context.isPopover)
     return (
       <Popover.Portal>
         <Popover.Content
           align={align}
           sideOffset={sideOffset}
           className={cx(
-            "relative bg-background text-sm rounded-xl overflow-hidden shadow-xl  border-2 dark:border text-foreground md:max-h-[500px] overflow-y-auto",
+            "relative bg-background text-sm rounded-xl overflow-hidden shadow-xl  border-2 dark:border text-foreground md:max-h-[500px] overflow-y-auto z-[100]",
             className
           )}
         >
@@ -107,12 +117,13 @@ const OverlayContent = ({
       <Drawer.Content
         className={cx(
           "bg-background text-sm flex flex-col rounded-t-xl h-[85%] mt-24 fixed bottom-0 left-0 right-0 text-foreground",
-          className,
-          "overflow-hidden"
+          className
         )}
       >
-        <div className="mx-auto w-2/4 h-2  my-2 rounded-full bg-background-focused "></div>
-        <div className="overflow-y-auto">{children}</div>
+        <div className="mx-auto w-2/4 h-2  my-2 rounded-full bg-background-focused " />
+        <div className="overflow-y-auto w-[96%] md:w-[90%] mx-auto my-3">
+          {children}
+        </div>
       </Drawer.Content>
       <Drawer.Overlay />
     </Drawer.Portal>

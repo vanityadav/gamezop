@@ -1,13 +1,14 @@
-import { Game } from "../types/game";
-import games from "../../data.json";
+// import games from "../../data.json";
 
 type GamesApiResponse = {
   games: Game[];
 };
 
+
+// for prod
 const getGames = async () => {
   try {
-    const response = await fetch(process.env.API_URL);
+    const response = await fetch(process.env.API_URL, { cache: "no-store" });
 
     if (!response.ok) {
       throw new Error("Service Error");
@@ -20,6 +21,8 @@ const getGames = async () => {
   }
 };
 
+
+// for local
 // const getGames = (): Game[] => {
 //   return games?.games;
 // };

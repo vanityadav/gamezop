@@ -1,19 +1,21 @@
-import { Game } from "../types/game";
-import { returnGames } from "./return-games";
 import sortBy from "../utils/sort-games";
+import { limitResults, returnGames } from "./utils";
 
-type Args = {
-  limit?: number;
+type Args = LimitedResults & {
   fetchedGames?: Game[];
 };
 
-const getMostPlayedGames = async ({ limit, fetchedGames }: Args = {}) => {
+const getMostPlayedGames = async ({ skip, take, fetchedGames }: Args = {}) => {
   const games = await returnGames(fetchedGames);
 
-  return sortBy<Game>({
+  const sortedGames = sortBy<Game>({
     data: games,
     accessor: "gamePlays",
     order: "DESC",
-  })?.slice(0, limit);
+  });
+
+  if (take) return limitResults(sortedGames, take, skip);
+
+  return sortedGames;
 };
 export default getMostPlayedGames;

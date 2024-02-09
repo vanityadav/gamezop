@@ -1,6 +1,4 @@
-import { LanguageBasedData, LanguageBasedDataList } from "./languages";
-
-export type Game = {
+type Game = {
   code: string;
   url: string;
   name: LanguageBasedData;
@@ -21,7 +19,7 @@ export type Game = {
   hasIntegratedAds: boolean;
 };
 
-export type Assets = {
+type Assets = {
   cover: string;
   brick: string;
   thumb: string;

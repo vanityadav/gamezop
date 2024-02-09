@@ -5,6 +5,7 @@ import cx from "@/lib/utils/cx";
 import { ReactNode } from "react";
 import SearchGames from "./search-games";
 import Button from "@/components/ui/button";
+import { blurDataURL } from "@/lib/constants/utils";
 import { BellDot, Globe, Search, User } from "lucide-react";
 import {
   Overlay,
@@ -44,6 +45,8 @@ export default function UserAccountSection() {
                 width={40}
                 alt="icon"
                 className="rounded-xl object-cover aspect-square"
+                placeholder="blur"
+                blurDataURL={blurDataURL}
               />
               <span className="line-clamp-2 text-balance my-auto">
                 {notification.content}

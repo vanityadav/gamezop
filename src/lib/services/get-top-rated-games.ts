@@ -6,11 +6,7 @@ type Args = LimitedResults & {
   fetchedGames?: Game[];
 };
 
-const getTopRatedGames = async ({
-  take = 0,
-  skip = 0,
-  fetchedGames,
-}: Args = {}) => {
+const getTopRatedGames = async ({ take, skip, fetchedGames }: Args = {}) => {
   const games = await returnGames(fetchedGames);
 
   const sortedGames = sortBy<Game>({
@@ -19,7 +15,9 @@ const getTopRatedGames = async ({
     order: "DESC",
   });
 
-  return limitResults(sortedGames, take, skip);
+  if (take) return limitResults(sortedGames, take, skip);
+
+  return sortedGames;
 };
 
 export default getTopRatedGames;

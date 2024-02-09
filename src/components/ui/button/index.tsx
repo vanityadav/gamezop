@@ -7,15 +7,11 @@ const buttonVariants = cva(
   {
     variants: {
       intent: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input hover:bg-accent hover:text-accent-foreground",
+        default: "",
+        "featured-play":
+          "max-xs:px-4 dark:bg-foreground bg-background  text-foreground dark:text-background px-14 py-4 uppercase tracking-wide text-xs rounded-md font-medium hover:shadow-2xl",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "underline-offset-4 hover:underline text-primary",
+          "max-xs:dark:bg-foreground/25 max-xs:bg-background/25  flex items-center justify-center p-4 dark:hover:bg-foreground/25 hover:bg-background/25  rounded-md text-xs uppercase hover:shadow-xl gap-4 text-shadow-dark text-[10px]  dark:text-foreground text-background",
         icon: "p-2 rounded-xl hover:bg-background-focused max-sm:p-1 ",
       },
       size: {

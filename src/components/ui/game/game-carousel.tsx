@@ -1,84 +1,138 @@
 "use client";
 
-import Image from "next/image";
 import cx from "@/lib/utils/cx";
-import ringBuffer from "@/lib/utils/ring-buffer";
 import useGameCarousel from "@/lib/hooks/use-game-carousel";
+import { EmblaPluginType, EmblaOptionsType } from "embla-carousel";
+import { ComponentProps, ReactNode, createContext, useContext } from "react";
 
-type Props = {
-  game: Game;
-  language?: Language;
+type Props<T> = ComponentProps<"div"> & {
+  language: Language;
+  isPortrait: boolean;
+  screens: T[];
+  alt?: string;
+  heroOptions?: EmblaOptionsType;
+  trackerOptions?: EmblaOptionsType;
+  plugins?: EmblaPluginType[];
 };
 
-export default function GameCarousel({ game, language = "en" }: Props) {
-  const {
-    assets: { screens },
-    gamePreviews,
-    isPortrait,
-    name,
-  } = game;
+type CarouselContext<T> = Props<T> & {
+  selectedIndex: number;
+  onThumbClick: Function;
+  // TODO: Search for types package for the library
+  heroRef: any;
+  trackerRef: any;
+};
 
-  const {
-    selectedIndex,
-    onThumbClick,
-    slides,
-    thumbCarouselRef,
-    heroCarouselRef,
-  } = useGameCarousel({ gamePreview: !!gamePreviews[language], isPortrait });
+// TODO :  fix context generic types
+const createCarouselContext = <T,>() =>
+  createContext<CarouselContext<T> | null>(null);
+
+export const CarouselContext = createCarouselContext();
+
+const GameCarousel = <T,>({
+  screens,
+  language = "en",
+  isPortrait,
+  alt,
+  className,
+  heroOptions,
+  trackerOptions,
+  plugins,
+  ...props
+}: Props<T>) => {
+  const { selectedIndex, onThumbClick, trackerRef, heroRef } = useGameCarousel({
+    isPortrait,
+    heroOptions,
+    trackerOptions,
+    plugins,
+  });
 
   return (
-    <div className={cx("flex flex-col gap-2", isPortrait && "flex-row")}>
+    <CarouselContext.Provider
+      value={{
+        selectedIndex,
+        onThumbClick,
+        screens,
+        language,
+        alt,
+        isPortrait,
+        heroRef,
+        trackerRef,
+      }}
+    >
       <div
-        className={cx("overflow-hidden", isPortrait && "h-fit flex-[4]")}
-        ref={heroCarouselRef}
-      >
-        <div className="flex">
-          {slides.map((index) => (
-            <div key={index} className="flex-[0_0_100%]">
-              <Image
-                key={index}
-                className="object-contain w-full rounded-md"
-                src={ringBuffer(index, screens)}
-                alt={name[language]}
-                height={isPortrait ? 1280 : 720}
-                width={isPortrait ? 720 : 1280}
-                placeholder="blur"
-                blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsamhYAQAFOgIsGY9yDQAAAABJRU5ErkJggg=="
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+        className={cx(
+          "flex flex-col gap-2",
+          isPortrait && "flex-row",
+          className
+        )}
+        {...props}
+      />
+    </CarouselContext.Provider>
+  );
+};
 
-      <div className="overflow-hidden flex-1" ref={thumbCarouselRef}>
-        <div className={cx("flex gap-1", isPortrait && "flex-col h-[200px]")}>
-          {slides.map((index) => (
-            <div
-              key={index}
-              className={cx(
-                "opacity-30",
-                isPortrait && "flex",
-                index === selectedIndex && "opacity-100"
-              )}
-            >
-              <button
-                onClick={() => onThumbClick(index)}
-                className="touch-manipulation w-full"
-              >
-                <Image
-                  height={isPortrait ? 320 : 180}
-                  width={isPortrait ? 180 : 320}
-                  className="w-full object-contain rounded-md"
-                  src={ringBuffer(index, screens)}
-                  alt={name[language]}
-                  placeholder="blur"
-                  blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsamhYAQAFOgIsGY9yDQAAAABJRU5ErkJggg=="
-                />
-              </button>
-            </div>
-          ))}
-        </div>
+type HeroSectionProps = ComponentProps<"div"> & {
+  children: ReactNode;
+};
+
+const HeroSection = ({ children, className, ...props }: HeroSectionProps) => {
+  const drawerContext = useContext(CarouselContext);
+  if (!drawerContext) throw new Error("Carousel Context not in scope");
+
+  const { isPortrait, heroRef } = drawerContext;
+
+  return (
+    <div
+      className={cx(
+        "overflow-hidden",
+        isPortrait && "h-fit flex-[4]",
+        className
+      )}
+      {...props}
+      ref={heroRef}
+    >
+      <div className="flex">{children}</div>
+    </div>
+  );
+};
+
+type TrackerSectionProps = ComponentProps<"div"> & {
+  children: ReactNode;
+  wrapperClassName?: string;
+};
+
+const TrackerSection = ({
+  children,
+  className,
+  wrapperClassName,
+  ...props
+}: TrackerSectionProps) => {
+  const drawerContext = useContext(CarouselContext);
+  if (!drawerContext) throw new Error("Carousel Context not in scope");
+
+  const { isPortrait, trackerRef } = drawerContext;
+
+  return (
+    <div
+      className={cx("overflow-hidden flex-1", wrapperClassName)}
+      ref={trackerRef}
+    >
+      <div
+        className={cx(
+          "flex gap-1",
+          isPortrait && "flex-col h-[200px]",
+          className
+        )}
+        {...props}
+      >
+        {children}
       </div>
     </div>
   );
-}
+};
+
+GameCarousel.Carousel = HeroSection;
+GameCarousel.Tracker = TrackerSection;
+
+export default GameCarousel;

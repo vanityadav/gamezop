@@ -2,13 +2,18 @@ import Link from "next/link";
 import cx from "@/lib/utils/cx";
 import getGameTypes from "@/lib/services/get-game-types";
 
+type Props = {
+  activeCategory?: string;
+  fetchedGames?: Game[];
+};
+
 export default async function Categories({
   activeCategory,
-}: {
-  activeCategory?: string;
-}) {
+  fetchedGames,
+}: Props) {
   const categories = await getGameTypes({
     type: "categories",
+    fetchedGames,
   });
 
   if (!categories) return null;

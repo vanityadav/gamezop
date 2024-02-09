@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { limitResults, returnGames } from "./utils";
 import getGameTypes from "./get-game-types";
+import { limitResults, returnGames } from "./utils";
 
 type Args = LimitedResults & {
   value: string;
@@ -22,10 +22,9 @@ const getGamesByTypes = async ({
   const types = await getGameTypes({
     fetchedGames: games,
     type,
-    withCount: false,
   });
 
-  if (!types.toString().toLowerCase().includes(value)) notFound();
+  if (!types.toString().toLowerCase().includes(value.toLowerCase())) notFound();
 
   const filteredGames = games.filter((games) =>
     games[type][language]
@@ -34,7 +33,7 @@ const getGamesByTypes = async ({
       .includes(value.toLowerCase())
   );
 
-  if (take || skip) return limitResults(filteredGames, take, skip);
+  if (take) return limitResults(filteredGames, take, skip);
 
   return filteredGames;
 };

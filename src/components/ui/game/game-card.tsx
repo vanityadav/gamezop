@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import cx from "@/lib/utils/cx";
 import { Heart, Star } from "lucide-react";
+import { blurDataURL } from "@/lib/constants/utils";
 import { VariantProps, cva } from "class-variance-authority";
 
 const cardVariants = cva("", {
@@ -54,7 +55,10 @@ export default function GameCard({
           style={{ background: colorVibrant }}
         >
           <Heart
-            className={cx("text-foreground", size === "sm" && "w-4 h-4")}
+            className={cx(
+              "stroke-background dark:stroke-foreground",
+              size === "sm" && "w-4 h-4"
+            )}
           />
         </div>
         <Image
@@ -63,7 +67,7 @@ export default function GameCard({
           width={300}
           height={246}
           placeholder="blur"
-          blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsamhYAQAFOgIsGY9yDQAAAABJRU5ErkJggg=="
+          blurDataURL={blurDataURL}
           className={cx(
             "h-full w-full object-contain rounded-md",
             cardVariants({ size })

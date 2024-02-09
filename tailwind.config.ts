@@ -10,6 +10,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: { xs: "380px" },
       colors: {
         background: "rgb(var(--background))",
         foreground: "rgb(var(--foreground))",

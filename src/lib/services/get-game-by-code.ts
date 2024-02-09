@@ -12,6 +12,7 @@ const getGameByCode = async ({ code, fetchedGames }: Args) => {
   const game = games?.find((game) => game.code === code);
 
   if (!game) notFound();
+
   return game;
 };
 

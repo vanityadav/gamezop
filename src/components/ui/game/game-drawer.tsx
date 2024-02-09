@@ -4,6 +4,7 @@ import { Drawer } from "vaul";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReactNode, createContext, useState } from "react";
+
 type Props = {
   children: ReactNode;
 };
@@ -15,8 +16,9 @@ type DrawerState = {
 export const DrawerContext = createContext<DrawerState | null>(null);
 
 export default function GameDrawer({ children }: Props) {
-  const [open, setOpen] = useState(true);
   const router = useRouter();
+  const [open, setOpen] = useState(true);
+
   return (
     <DrawerContext.Provider value={{ setOpen }}>
       <Drawer.Root open={open} shouldScaleBackground dismissible={false}>
@@ -26,7 +28,7 @@ export default function GameDrawer({ children }: Props) {
           <Drawer.Content className="bg-background flex flex-col rounded-t-xl h-[94%] fixed bottom-0 left-0 right-0">
             <Drawer.Close asChild>
               <div
-                className="absolute -top-11 right-2 z-[100] bg-background-focused/90 backdrop-blur p-2 rounded-md cursor-pointer"
+                className="absolute -top-11 right-2 z-[90] bg-background-focused/90 backdrop-blur p-2 rounded-md cursor-pointer"
                 onClick={() => {
                   router.back();
                   setOpen(false);

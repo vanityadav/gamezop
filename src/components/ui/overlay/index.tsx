@@ -97,7 +97,7 @@ const OverlayContent = ({
           align={align}
           sideOffset={sideOffset}
           className={cx(
-            "relative bg-background text-sm rounded-xl overflow-hidden shadow-xl  border-2 dark:border text-foreground md:max-h-[500px] overflow-y-auto",
+            "relative bg-background text-sm rounded-xl overflow-hidden shadow-xl  border-2 dark:border text-foreground md:max-h-[500px] overflow-y-auto z-[100]",
             className
           )}
         >

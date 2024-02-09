@@ -1,55 +1,58 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
-import { isPromise } from "util/types";
+import { EmblaPluginType, EmblaOptionsType } from "embla-carousel";
 
 type Props = {
-  gamePreview: boolean;
   isPortrait: boolean;
+  heroOptions?: EmblaOptionsType;
+  trackerOptions?: EmblaOptionsType;
+  plugins?: EmblaPluginType[];
 };
 
-export default function useGameCarousel({ gamePreview, isPortrait }: Props) {
-  let SLIDE_COUNT = 3;
-  if (gamePreview) SLIDE_COUNT = 4;
-  const slides = Array.from(Array(SLIDE_COUNT).keys());
-
+export default function useGameCarousel({
+  isPortrait,
+  heroOptions,
+  trackerOptions,
+  plugins,
+}: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const [heroCarouselRef, heroCarouselApi] = useEmblaCarousel();
+  const [heroRef, heroAPI] = useEmblaCarousel(heroOptions, plugins);
 
-  const [thumbCarouselRef, thumbCarouselApi] = useEmblaCarousel({
+  const [trackerRef, trackerAPI] = useEmblaCarousel({
     axis: isPortrait ? "y" : "x",
+    ...trackerOptions,
   });
 
   const onThumbClick = useCallback(
     (index: number) => {
-      if (!heroCarouselApi || !thumbCarouselApi) return;
+      if (!heroAPI || !trackerAPI) return;
 
-      heroCarouselApi.scrollTo(index);
+      heroAPI.scrollTo(index);
     },
-    [heroCarouselApi, thumbCarouselApi]
+    [heroAPI, trackerAPI]
   );
 
   const onSelect = useCallback(() => {
-    if (!heroCarouselApi || !thumbCarouselApi) return;
+    if (!heroAPI || !trackerAPI) return;
 
-    setSelectedIndex(heroCarouselApi.selectedScrollSnap());
-    thumbCarouselApi.scrollTo(heroCarouselApi.selectedScrollSnap());
-  }, [heroCarouselApi, thumbCarouselApi, setSelectedIndex]);
+    setSelectedIndex(heroAPI.selectedScrollSnap());
+    trackerAPI.scrollTo(heroAPI.selectedScrollSnap());
+  }, [heroAPI, trackerAPI, setSelectedIndex]);
 
   useEffect(() => {
-    if (!heroCarouselApi) return;
+    if (!heroAPI) return;
 
     onSelect();
 
-    heroCarouselApi.on("select", onSelect);
-    heroCarouselApi.on("reInit", onSelect);
-  }, [heroCarouselApi, onSelect]);
+    heroAPI.on("select", onSelect);
+    heroAPI.on("reInit", onSelect);
+  }, [heroAPI, onSelect]);
 
   return {
     selectedIndex,
     onThumbClick,
-    slides,
-    thumbCarouselRef,
-    heroCarouselRef,
+    trackerRef,
+    heroRef,
   };
 }

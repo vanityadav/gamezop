@@ -1,10 +1,11 @@
 import Image from "next/image";
 import cx from "@/lib/utils/cx";
 import RelevantGames from "./relevant-games";
-import GamePageHeader from "./game-info-header";
-import LinkLabelSection from "./link-label-section";
-import GameCarousel from "@/components/ui/game/game-carousel";
+import GameInfoHeader from "./game-info-header";
+import GameInfoCarousel from "./game-info-carousel";
+import { blurDataURL } from "@/lib/constants/utils";
 import LinkLabelSectionServer from "./link-label-section-server";
+import LinkLabelSectionClient from "./link-label-section-client";
 
 type Props = {
   game: Game;
@@ -23,21 +24,23 @@ export default function GameInfo({ game, language = "en" }: Props) {
     gamePlays,
     isPortrait,
     assets: { brick },
+    gamePreviews,
     url,
   } = game;
   return (
     <div className="flex flex-col gap-6">
-      <GamePageHeader
+      <GameInfoHeader
         gamePlays={gamePlays}
         numberOfRatings={numberOfRatings}
         rating={rating}
+        preview={gamePreviews[language]}
         title={name[language]}
         url={url}
         language={language}
       />
       <div className="flex gap-8 flex-col-reverse md:flex-row">
         <div className="flex-[3] flex">
-          <GameCarousel game={game} />
+          <GameInfoCarousel game={game} language={language} />
         </div>
         <div
           className={cx(
@@ -51,12 +54,12 @@ export default function GameInfo({ game, language = "en" }: Props) {
             height={150}
             width={310}
             placeholder="blur"
-            blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsamhYAQAFOgIsGY9yDQAAAABJRU5ErkJggg=="
+            blurDataURL={blurDataURL}
             className="object-contain rounded-md h-max w-full"
           />
           <p className="leading-relaxed">{description[language]}</p>
 
-          <LinkLabelSection
+          <LinkLabelSectionClient
             basePath="categories"
             labelHeading="Genre"
             labels={categories[language]}
@@ -66,8 +69,8 @@ export default function GameInfo({ game, language = "en" }: Props) {
               labelHeading="Genre"
               labels={categories[language]}
             />
-          </LinkLabelSection>
-          <LinkLabelSection
+          </LinkLabelSectionClient>
+          <LinkLabelSectionClient
             basePath="tags"
             labelHeading="Tags"
             labels={tags[language]}
@@ -77,7 +80,7 @@ export default function GameInfo({ game, language = "en" }: Props) {
               labelHeading="Tags"
               labels={tags[language]}
             />
-          </LinkLabelSection>
+          </LinkLabelSectionClient>
         </div>
       </div>
       <RelevantGames

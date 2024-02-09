@@ -11,7 +11,7 @@ type LabelProps = {
   children: ReactNode;
 };
 
-export default function LinkLabelSection({
+export default function LinkLabelSectionClient({
   labels,
   labelHeading,
   basePath,

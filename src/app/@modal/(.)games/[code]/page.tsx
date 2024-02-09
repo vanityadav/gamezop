@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import GameInfo from "@/components/ui/game/game-info";
 import GameDrawer from "@/components/ui/game/game-drawer";
 import getGameByCode from "@/lib/services/get-game-by-code";
+import GameInfoSkelton from "@/components/ui/game/game-info-skelton";
 
 type Props = {
   params: { code: string };
@@ -10,8 +11,7 @@ type Props = {
 export default function Page({ params: { code } }: Props) {
   return (
     <GameDrawer>
-      {/* TODO: Make Loader */}
-      <Suspense fallback={"Game Info Loading..."}>
+      <Suspense fallback={<GameInfoSkelton />}>
         <GamePage code={code} />
       </Suspense>
     </GameDrawer>
@@ -20,6 +20,5 @@ export default function Page({ params: { code } }: Props) {
 
 const GamePage = async ({ code }: { code: string }) => {
   const game = await getGameByCode({ code: decodeURIComponent(code) });
-
   return <GameInfo game={game} />;
 };

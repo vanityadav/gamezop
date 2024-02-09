@@ -25,7 +25,7 @@ export default function GameDrawer({ children }: Props) {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40 dark:bg-white/10 backdrop-blur-sm" />
 
-          <Drawer.Content className="bg-background flex flex-col rounded-t-xl h-[94%] fixed bottom-0 left-0 right-0">
+          <Drawer.Content className="bg-background flex flex-col rounded-t-xl h-[94%] fixed bottom-0 left-0 right-0 z-[80]">
             <Drawer.Close asChild>
               <div
                 className="absolute -top-11 right-2 z-[90] bg-background-focused/90 backdrop-blur p-2 rounded-md cursor-pointer"

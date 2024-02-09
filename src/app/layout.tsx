@@ -9,7 +9,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 const sans = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GameZop",
+  title: "Gamezop",
   description: "Web game platform",
 };
 

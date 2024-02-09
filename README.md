@@ -29,6 +29,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Pending Work
 
-- Loaders/Skelton for pages
+- Loaders/Skelton for all pages
 - Searching implementation on the FE
 - PWA Service Workers

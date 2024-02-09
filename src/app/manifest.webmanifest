@@ -28,5 +28,66 @@
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "/desktop.png",
+      "sizes": "2880x1800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Homescreen of Gamezop Desktop App"
+    },
+    {
+      "src": "/game-library.png",
+      "sizes": "2880x1800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Game Library of Gamezop Desktop App"
+    },
+    {
+      "src": "/mobile.png",
+      "sizes": "1080x2400",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Homescreen of Gamezop Mobile App"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Top player rated",
+      "url": "/top-rated-games",
+      "description": "List of top rated games",
+      "icons": [
+        {
+          "src": "/icon-shortcut.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "All Games",
+      "url": "/games",
+      "description": "List of all games",
+      "icons": [
+        {
+          "src": "/icon-shortcut.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Most played",
+      "url": "/most/played/games",
+      "description": "List of Popular games",
+      "icons": [
+        {
+          "src": "/icon-shortcut.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }

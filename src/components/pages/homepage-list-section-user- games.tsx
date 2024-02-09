@@ -18,7 +18,7 @@ export default async function HomepageListSectionUserGames({
   const suggestions = await getRandomGames({ fetchedGames, take: listSize });
   const favorites = await getRandomGames({ fetchedGames, take: listSize });
   return (
-    <div className="flex gap-12 justify-between overflow-x-scroll  text-nowrap no-scrollbar snap-x snap-proximity mt-16">
+    <div className="flex gap-12 justify-between overflow-x-scroll  whitespace-nowrap text-nowrap no-scrollbar snap-x snap-proximity mt-16">
       <GameListCardSection title="Recently Played">
         {recentPlays.map((game) => (
           <GameListCard key={game.code} game={game} showPlays showRating />

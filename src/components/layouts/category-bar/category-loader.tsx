@@ -6,7 +6,7 @@ export default function CategoriesLoader({
   const categories = new Array(numberOfLoaders).fill("Action new");
 
   return (
-    <div className="flex items-center justify-between gap-3 overflow-x-auto text-nowrap no-scrollbar animate-pulse">
+    <div className="flex items-center justify-between gap-3 overflow-x-auto whitespace-nowrap text-nowrap no-scrollbar animate-pulse">
       {categories.map((category, index) => (
         <div
           key={index}

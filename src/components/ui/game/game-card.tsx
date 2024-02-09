@@ -83,7 +83,7 @@ export default function GameCard({
         >
           <span
             className={cx(
-              "text-nowrap font-medium overflow-hidden overflow-ellipsis",
+              "whitespace-nowrap text-nowrap font-medium overflow-hidden overflow-ellipsis",
               size === "lg" && "max-w-[22ch] md:max-w-[27ch]",
               size === "default" && "max-w-[17ch] md:max-w-[20ch]",
               size === "md" && "max-w-[12ch] md:max-w-[15ch]",

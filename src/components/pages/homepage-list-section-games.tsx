@@ -17,7 +17,7 @@ export default async function HomepageListSectionGames({
   const topRated = await getTopRatedGames({ fetchedGames, take: listSize });
   const mostPlayed = await getMostPlayedGames({ fetchedGames, take: listSize });
   return (
-    <div className="flex gap-12 justify-between overflow-x-scroll  text-nowrap no-scrollbar snap-x snap-proximity mt-20">
+    <div className="flex gap-12 justify-between overflow-x-scroll  whitespace-nowrap text-nowrap no-scrollbar snap-x snap-proximity mt-20">
       <GameListCardSection title="Top player rated" href="/top-rated-games">
         {topRated.map((game) => (
           <GameListCard key={game.code} game={game} showRating />

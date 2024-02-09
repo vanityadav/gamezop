@@ -38,7 +38,7 @@ export default function GameListCard({
         blurDataURL={blurDataURL}
       />
       <div className="text-foreground-muted text-xs gap-2 flex flex-col">
-        <p className="text-start overflow-hidden text-foreground text-sm overflow-ellipsis max-w-full text-nowrap font-medium">
+        <p className="text-start overflow-hidden text-foreground text-sm overflow-ellipsis max-w-full whitespace-nowrap text-nowrap font-medium">
           {game.name[language]}
         </p>
         <div className="flex items-center gap-3">

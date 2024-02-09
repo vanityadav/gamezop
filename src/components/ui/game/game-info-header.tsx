@@ -43,7 +43,7 @@ export default function GameInfoHeader({
           </Button>
           <Link
             href={url}
-            className="max-sm:p-2 px-6 py-3 border text-nowrap text-center rounded-full bg-foreground text-background font-semibold"
+            className="max-sm:p-2 px-6 py-3 border whitespace-nowrap text-nowrap text-center rounded-full bg-foreground text-background font-semibold"
           >
             <span className="hidden sm:block">Play Now</span>
             <span className="block sm:hidden">

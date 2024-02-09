@@ -20,7 +20,7 @@ export default async function Categories({
   if (!Array.isArray(categories)) throw new Error("Bad Response");
 
   return (
-    <div className="flex items-center justify-between gap-3 overflow-x-auto text-nowrap no-scrollbar">
+    <div className="flex items-center justify-between gap-3 overflow-x-auto whitespace-nowrap text-nowrap no-scrollbar">
       {categories.map((category) => (
         <Link
           key={category}

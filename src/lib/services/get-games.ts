@@ -4,6 +4,7 @@ type GamesApiResponse = {
   games: Game[];
 };
 
+
 // for prod
 const getGames = async () => {
   try {
@@ -19,6 +20,7 @@ const getGames = async () => {
     throw new Error("Oh, There was an Error");
   }
 };
+
 
 // for local
 // const getGames = (): Game[] => {

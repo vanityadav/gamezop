@@ -17,7 +17,7 @@ export default function GameInfoCarouselTracker() {
   return (screens as string[]).map((screen, index) => {
     const isPreview = screen.startsWith("https://youtu.be");
 
-    const src = isPreview ? (screens.at(1) as string) : screen;
+    const src = isPreview ? (screens.at(0) as string) : screen;
 
     const imageHeight = isPortrait ? 320 : 180;
     const imageWidth = isPortrait ? 180 : 320;

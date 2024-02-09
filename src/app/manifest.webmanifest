@@ -3,7 +3,7 @@
   "background_color": "#fff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "https://vanit-gamezop.vercel.app/",
+  "start_url": "/",
   "name": "Gamezop",
   "short_name": "GZ",
   "description": "Online web based game platform",

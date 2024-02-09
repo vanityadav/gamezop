@@ -13,18 +13,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const game = await getGameByCode({ code: decodeURIComponent(id) });
 
   return {
-    title: game.name[language],
+    title: game.name[language] + " | Gamezop",
     description: game.description[language],
     openGraph: {
       images: [
-        game.assets.brickTiny,
-        game.assets.coverTiny,
         game.assets.cover,
         game.assets.square,
         game.assets.thumb,
         game.assets.wall,
         game.assets.brick,
-        ...game.assets.screens,
       ],
     },
   };

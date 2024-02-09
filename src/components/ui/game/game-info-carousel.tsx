@@ -18,7 +18,7 @@ export default function GameInfoCarousel({ game, language }: Props) {
   } = game;
 
   let slides: string[] | null = null;
-  if (gamePreviews[language]) slides = [gamePreviews[language], ...screens];
+  if (gamePreviews[language]) slides = [...screens, gamePreviews[language]];
 
   return (
     <GameCarousel

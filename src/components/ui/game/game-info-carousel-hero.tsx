@@ -12,7 +12,7 @@ export default function GameInfoCarouselHero() {
   const { screens, isPortrait, alt } = drawerContext;
 
   return screens.map((screen, index) => {
-    const previewSrc = `http://www.youtube.com/embed/${(screen as string)
+    const previewSrc = `https://www.youtube.com/embed/${(screen as string)
       .split("/")
       .at(-1)}`;
 

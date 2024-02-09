@@ -4,6 +4,7 @@ import CategoryBar from "@/components/layouts/category-bar";
 import FeaturedSection from "@/components/ui/game/featured-section";
 import HomepageCategorySections from "@/components/pages/homepage-category-sections";
 import HomepageListSectionUserGames from "@/components/pages/homepage-list-section-user- games";
+import HomepageListSectionGames from "@/components/pages/homepage-list-section-games";
 
 export default async function Home() {
   const games = await getGames();
@@ -21,14 +22,17 @@ export default async function Home() {
       <FeaturedSection fetchedGames={games} />
       <HomepageListSectionUserGames fetchedGames={games} />
 
-      {categoryNames.map((category) => (
-        <HomepageCategorySections
-          key={category}
-          fetchedGames={games}
-          category={category}
-          count={(categories as Record<string, number>)[category]}
-        />
+      {categoryNames.map((category, index) => (
+        <>
+          <HomepageCategorySections
+            key={category}
+            fetchedGames={games}
+            category={category}
+            count={(categories as Record<string, number>)[category]}
+          />
+        </>
       ))}
+      <HomepageListSectionGames fetchedGames={games} />
     </>
   );
 }

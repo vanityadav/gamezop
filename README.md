@@ -14,7 +14,7 @@ Note: Update the API_URL in the .env file
 
 ```bash
 bun install
-bun dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

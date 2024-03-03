@@ -1,4 +1,4 @@
-// import games from "../../data.json";
+import games from "../../data.json";
 
 type GamesApiResponse = {
   games: Game[];
